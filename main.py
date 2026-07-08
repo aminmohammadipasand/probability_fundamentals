@@ -52,7 +52,16 @@ class BinomialDistribution:
     def generate_sample(self):
         return sum(self.bernoulli.generate_sample() for i in range(self.n))
 
+class GeometricDistribution:
+    def __init__(self, p, random_engine):
+        self.p = p
+        self.engine = random_engine
 
+    def generate_sample(self):
+        k = 1
+        while self.engine.next_random() >= self.p:
+            k += 1
+        return k
 
 class PoissonDistribution:
     def __init__(self, lam, random_engine):
