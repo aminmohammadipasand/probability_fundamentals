@@ -258,7 +258,7 @@ def main_menu():
         print("3. Bi hafezegi")
         print("4. Ghazayeh taghrib hady be normal")
         print("5. exit")
-        print("═"*60)
+        print("═"*50)
         
         choice = input("Enter what you wanna do:").strip()
         
