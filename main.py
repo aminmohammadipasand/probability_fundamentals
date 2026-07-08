@@ -163,6 +163,26 @@ class LimitTheoremsEvaluator:
 
 
 if __name__ == "__main__":
+    #comparison in faze 0:
+    lcg = LCGEngine()
+    start_time = time.time()
+    for i in range(1000000):
+        lcg.next_random()
+    lcg_time = time.time() - start_time
+    
+    xorshift = XorShiftEngine()
+    start_time = time.time()
+    for i in range(1000000):
+        xorshift.next_random()
+    xorshift_time = time.time() - start_time
+    
+    if lcg_time < xorshift_time:
+        print("lcg is faster than xorshift")
+    else:
+        print("xorshift is faster than lcg")
+
+
+    lcg = LCGEngine()
     engine = XorShiftEngine()
     evaluator = LimitTheoremsEvaluator()
     pois = PoissonDistribution(40, engine)
