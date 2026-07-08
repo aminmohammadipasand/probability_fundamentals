@@ -2,6 +2,23 @@ import time
 import math
 C = 2 ** 31 - 1
 
+class LCGEngine:
+    def __init__(self, seed = None):
+        if seed is None:
+            seed = time.time_ns()
+        self.seed = seed % C
+        if self.seed == 0:
+            self.seed = 1
+
+    def set_seed(self, seed):
+        self.seed = seed % C
+        if self.seed == 0:
+            self.seed = 1
+
+    def next_random(self):
+        self.seed = (48271 * self.seed) % C
+        return self.seed / C
+
 class XorShiftEngine:
     def __init__(self, seed=time.time_ns()):
         self.seed = seed % C
