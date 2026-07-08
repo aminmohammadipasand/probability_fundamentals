@@ -172,7 +172,6 @@ class LimitTheoremsEvaluator:
         return empirical_prob, theoretical_prob, error_pct
 
     def evaluate_poisson_to_normal(self, poisson_samples, lam, a, b):
-        """سنجش تقریب پوآسون به نرمال با اعمال تصحیح پیوستگی"""
         M = len(poisson_samples)
         
         success_count = sum(1 for x in poisson_samples if a <= x <= b)
