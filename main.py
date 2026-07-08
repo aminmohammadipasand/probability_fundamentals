@@ -33,6 +33,26 @@ class XorShiftEngine:
         x ^= (x << 5) & 0xFFFFFFFF
         self.seed = x
         return x / 0xFFFFFFFF
+    
+class BernoulliDistribution:
+    def __init__(self, p, random_engine):
+        self.p = p
+        self.engine = random_engine
+
+    def generate_sample(self):
+        return 1 if self.engine.next_random() < self.p else 0
+    
+class BinomialDistribution:
+    def __init__(self, n, p, random_engine):
+        self.n = n
+        self.p = p
+        self.engine = random_engine
+        self.bernoulli = BernoulliDistribution(p, random_engine)
+
+    def generate_sample(self):
+        return sum(self.bernoulli.generate_sample() for i in range(self.n))
+
+
 
 class PoissonDistribution:
     def __init__(self, lam, random_engine):
