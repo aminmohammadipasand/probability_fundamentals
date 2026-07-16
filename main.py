@@ -43,7 +43,7 @@ def compare_engines():
     
     xorshift = XorShiftEngine()
     start_time = time.time()
-    for i in range(100000):
+    for i in range(1000000):
         xorshift.next_random()
     xorshift_time = time.time() - start_time   
 
@@ -106,7 +106,7 @@ class ExponentialDistribution:
     def generate_sample(self):
         u = self.engine.next_random()       
         while u == 0:
-            u = self.engine.next_float()
+            u = self.engine.next_random()
         
         return -math.log(u) / self.lam
 
@@ -123,11 +123,11 @@ class NormalDistribution:
             self._next_gauge = None
             return self.mu + z * self.sigma
 
-        u1 = self.engine.next_float()
-        u2 = self.engine.next_float()
+        u1 = self.engine.next_random()
+        u2 = self.engine.next_random()
 
         while u1 == 0:
-            u1 = self.engine.next_float()
+            u1 = self.engine.next_random()
 
         r = math.sqrt(-2.0 * math.log(u1))
         theta = 2.0 * math.pi * u2
